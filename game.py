@@ -1,4 +1,6 @@
 import random
+import time
+
 
 print("welcome to our kahoots!")
 # add score
@@ -24,22 +26,24 @@ print("Hello", name, "Lets start our game!")
 # else:
 #     print("wrong answer")
 
-# lets create a dictionary object with all our questions stored inside of it that we can access randomly
 
+# create a list values that can be associated with correct answers ,like "A", "B", "C", "D"
+# lets create a dictionary object with all our questions stored inside of it that we can access randomly
+letters = ["A", "B", "C", "D"]
 questions = {
     # Question1: answer1,
     "What language is this quiz written in?": {
         "options":["js", "python", "c++", "Ruby"],
         # from those options which one is correct?
-        "answer":"python"
+        "answer":"B"
     },
     "what symbol is used to write a comment in python":{
         "options":["/", "~", "*", "#"],
-        "answer": "#"
+        "answer": "D"
     },
     "What function is used to display text in our terminal":{
         "options":["Display", "touch", "print", "write"],
-        "answer": "print"
+        "answer": "C"
     } 
 }
 
@@ -59,10 +63,25 @@ for question in question_list:
     print("\n" + question)
     # we need to define and then print all our options
     options = questions[question]["options"]
-    for option in options:
-        print(option)
-    answer = input("Your answer:").strip().lower()
-    if answer == questions[question]["answer"]:
+
+    for letter, option in enumerate(options):
+        print(letters[letter]+ ".", option)
+
+    start_time = time.time()
+    #print(start_time)
+
+    answer = input("Your answer:").strip().upper()
+    end_time = time.time()
+    #print(end_time)
+
+    time_taken = end_time - start_time
+    #print(time_taken)
+    print("You took:", time_taken, "seconds")
+
+    if time_taken > 10:
+        print("Too slow! no points this round!")
+        print("your score this round is :",score )
+    elif answer == questions[question]["answer"]:
         print("\n Correct! score = +100")
 # update score if answer is correct
         score = score + 1
